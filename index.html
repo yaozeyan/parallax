@@ -1,0 +1,32 @@
+<!--头部动效-->
+<script>
+	document.addEventListener("mousemove",move,false);
+
+	var movieDate = {
+		data:[["Lgun",10,10],["Rgun",-10,-10],["Ljian",-5,-5],["Rjian",5,5],["stone",-10,-10],["stone1",10,10],["stone2",-20,-20]],
+		posData:[]
+	}
+	function initData(){
+		movieDate.posData = [];
+		for(var i = 0;i < movieDate.data.length;i++){
+	 		var obj = document.getElementById(movieDate.data[i][0]);
+	 		movieDate.posData.push([obj.offsetLeft,obj.offsetTop]);
+	 	}
+		console.log(movieDate.posData)
+	}
+	initData();
+	function move(e){
+		var h = document.documentElement.clientHeight || document.body.clientHeight;
+		var w = document.documentElement.clientWidth || document.body.clientWidth;
+	
+	 	var wval = (e.x - w/2)/(w/2);
+	 	var hval = (e.y - h/2)/(h/2);
+//	 	console.log(e.y)
+	// 	console.log(document.body.clientHeight/2)
+	   	for(var i = 0;i < movieDate.data.length;i++){
+	   		var obj = document.getElementById(movieDate.data[i][0]);
+	   		obj.style.left = (movieDate.posData[i][0] - wval*movieDate.data[i][1])+"px";
+	   		obj.style.top = (movieDate.posData[i][1] - hval*movieDate.data[i][2])+"px";
+	   		
+	   	}
+	}
